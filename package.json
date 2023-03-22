@@ -23,7 +23,7 @@
   },
   "scripts": {
     "authors": "echo 'react-loadable-ssr-addon is authored by: \n' > AUTHORS.md | git log --format='* %aN <%aE>' | sort -u >> AUTHORS.md",
-    "prepare": "npm run build && npm run authors",
+    "prepare": "npm run snyk-protect && npm run build && npm run authors",
     "prepublishOnly": "npm test && npm run lint",
     "preversion": "npm run lint",
     "postversion": "git push && git push --tags",
@@ -33,7 +33,8 @@
     "lint": "eslint --ext js --ext jsx source || exit 0",
     "lint:fix": "eslint --ext js --ext jsx source --fix|| exit 0",
     "test": "npm run clean:example && npm run build && webpack && ava; npm run clean:example",
-    "stats": "NODE_ENV=development webpack --profile --json > compilation-stats.json"
+    "stats": "NODE_ENV=development webpack --profile --json > compilation-stats.json",
+    "snyk-protect": "snyk-protect"
   },
   "engines": {
     "node": ">=10.13.0"
@@ -95,6 +96,8 @@
     "concurrency": 5
   },
   "dependencies": {
-    "@babel/runtime": "^7.10.3"
-  }
+    "@babel/runtime": "^7.10.3",
+    "@snyk/protect": "latest"
+  },
+  "snyk": true
 }
